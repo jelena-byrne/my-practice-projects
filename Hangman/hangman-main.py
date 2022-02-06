@@ -1,5 +1,8 @@
 import random
-import textwrap
+import string
+from words import words
+# print(words)
+
 
 # "Welcome to the hangman game:"
 
@@ -12,34 +15,52 @@ print(
 )
 
 # Pick a random word for user to guess:
-word_list = ["dog", "cat", "mouse", "horse"]
-n = random.randrange(0, 1)
-word = word_list[n]
-# print(word)
 
-letters_in_word = list(word)
 
-# print(list(word))
+def get_valid_word(words):
+    word = random.choice(words)  # randomly chooses something from the list
+    while '-' in word or ' ' in word:
+        word = random.choice(words)
+    return word
 
-"""word_len = len(word)
-word_letter_list = list()
-for letter in range(word):
-    word_letter_list.append(letter)"""
+# The game:
 
-# Prompts the user for letter input (change some 'print's to appropriate use of 'input'):
-"""guess = input("Enter a letter or guess the whole word: ")"""
 
-# Check if user input is in the word or equal to the word:
-"""if len(guess) < 1:
-    print('Please enter a letter or guess the whole word: ')
-elif len(guess) = 1:
-    # check if the letter is anywhere in the word and either
-    # hang a body part or reveal the correct letter's placement
-elif len(guess) = len(word):
-    # check if the letters match the word
-elif guess = word:
-    print('That\'s right, the chosen word was', word, 'and you guessed correctly!')
-elif len(guess)>1 and len(guess)<len(word):
-    print('Please enter a single letter or guess the word with the appropriate number of letters: ')
-else:"""
-# figure out what is missing
+def hangman():
+    # Separate the word into letters:
+    word = get_valid_word(words)
+    word_letters = set(word)  # letters in the word
+    alphabet = set(string.ascii_uppercase)
+    used_letters = set()  # what the user has guessed
+    print(word)
+
+    # Getting user input
+    while len(word_letters) > 0:
+        # letters used:
+        # .join(['a', 'b', 'cd']) --> 'a b cd'
+        print('You have used these letters: ', ' '.join(used_letters))
+
+        # what current word is:
+        word_list = [
+            letter if letter in used_letters else '-' for letter in word]
+        print('Current word: ', ' '.join(word_list))
+        print(used_letters)
+
+        user_letter = input('Guess a letter: ').upper()
+        if user_letter in alphabet - used_letters:  # check validity of the character input
+            # add a valid letter input into list of used letters
+            used_letters.add(user_letter)
+            if user_letter in word_letters:  # check if the letter is in the word chosen
+                # if yes, remove from the list of letters in the word chosen
+                word_letters.remove(user_letter)
+        elif user_letter in used_letters:
+            print("You have already guessed that letter, try another one.")
+        else:
+            print("Invalid character, try again.")
+    # Gets here when len(word_letters) == 0
+
+
+hangman()
+
+#user_input = input('Type something:')
+#print("You\'ve enetered " + user_input)
