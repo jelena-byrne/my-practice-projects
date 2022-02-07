@@ -1,6 +1,6 @@
 import random
 import string
-from words import words
+# from words import words
 # print(words)
 
 
@@ -63,4 +63,4 @@ def hangman():
 hangman()
 
 #user_input = input('Type something:')
-#print("You\'ve enetered " + user_input)
+#print("You\'ve entered " + user_input)
