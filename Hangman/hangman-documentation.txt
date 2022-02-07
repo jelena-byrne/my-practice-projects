@@ -1,1 +1,7 @@
-test file
+The current hangman game only includes a few text lines as guide.
+
+I'd like to expand on it by adding visuals that are not of text format.
+ - pictures
+ - animation
+
+To be continued...
