@@ -1,6 +1,6 @@
 import random
 import string
-# from words import words
+from words import words
 # print(words)
 
 
