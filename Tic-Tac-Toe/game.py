@@ -25,10 +25,14 @@ class TicTacToe:
         #         moves.append(i)
         # return moves
 
+    def empty_squares(self):
+        return  # stopped here
+
 
 def play(game, x_player, o_player, print_game=True):
     if print_game:
         game.print_board_nums()
 
-    letter - 'X'  # starting letter
-    # continue here...
+    letter = 'X'  # starting letter
+    # iterate while the game still has empty squares
+    while game.empty_squares():
