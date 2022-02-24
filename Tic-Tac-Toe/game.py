@@ -1,5 +1,6 @@
 from tkinter import dialog
 from player import HumanPlayer, RandomComputerPlayer
+import time
 
 
 class TicTacToe:
@@ -85,21 +86,21 @@ def play(game, x_player, o_player, print_game=True):
     # iterate while the game still has empty squares
     while game.empty_squares():
         # get the move from the appropriate player
-        if letter = 'O':
+        if letter == 'O':
             square = o_player.get_move(game)
         else:
             square = x_player.get_move(game)
 
         # define a function to make a move
         if game.make_move(square, letter):
-            if print_game():
-                print(letter + ' makes a move to square {square}')
+            if print_game:
+                print(letter + f' makes a move to square {square}')
                 game.print_board()
                 print('')  # just an empty line
 
             if game.current_winner:
                 if print_game:
-                    print(letter + 'wins!')
+                    print(letter + ' wins!')
 
             # after we made the move, we need to alternate the letters
             letter = 'O' if letter == 'X' else 'X'  # switches player
@@ -108,10 +109,15 @@ def play(game, x_player, o_player, print_game=True):
             # else:
             #     letter = 'X'
 
-        if print_game:
-            print('It\'s a tie!')
+        # add in a pause between human and computer moves to make it more realistic
+        time.sleep(1.5)
+
+    if print_game:
+        print('It\'s a tie!')
 
 
 if __name__ == '__main__':
     x_player = HumanPlayer('X')
     o_player = RandomComputerPlayer('O')
+    t = TicTacToe()
+    play(t, x_player, o_player, print_game=True)
